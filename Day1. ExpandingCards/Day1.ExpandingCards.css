@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  /* 박스의 크기를 어떤 것을 기준으로 계산할지 정하는 속성
+    기본값은 content-box */
+}
+
+body {
+  font-family: 'Crimson Text', serif;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  width: 90vw;
+}
+
+.panel {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  border-radius: 30px;
+  color: whitesmoke;
+  cursor: pointer;
+  flex: 0.5;
+  /* 그리드의 1fr과 같은 것. 커졌을 때를 위해 숫자를 0.5로 지정 */
+  margin: 10px;
+  position: relative;
+  /* position 속성을 통해 문서상에 요소를 배치하는 방법을 지정
+  top, right, bottom, left 속성을 통해 요소의 최종 위치를 결정
+  1. 기준을 잡는다 (position: relative)
+  2. 이동시킨다. (top: 50px)
+  - relative: 요소 자기 자신을 기준으로 배치
+   => 원래 위치를 기준으로 얼마만큼 떨어질지 결정
+   => 다른요소에 영향을 주지 않는다
+   => 문서상 원래 위치가 그대로 유지 된다.
+  - absolute: 부모 요소를 기준으로 배치
+   => 요소를 일반적인 문서 흐름에서 제거한다.
+   => 가장 가까운 위치에 있는 조상 요소를 기준으로 배치한다.
+   => 조상 중 position을 가진 요소가 없다면 초기 컨테이닝 블록body를 기준올 삼는다.
+   => 조상이 position relative라면 아래 요소는 그 조상에 기반한 absolute한 위치가 된다!
+   => 문서상 원래 위치를 잃어버린다. */
+  transition: flex 0.7s ease-in;
+}
+
+.panel h3 {
+  font-size: 24px;
+  position: absolute;
+  bottom: 5%;
+  margin: 0 30px;
+  opacity: 0;
+}
+
+/* class가 panel이면서 active인 것  */
+.panel.active {
+  flex: 5;
+}
+
+.panel.active h3 {
+  opacity: 1;
+  transition: opacity 0.5s ease-in 0.6s;
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 100vw;
+  }
+  .panel:nth-of-type(5),
+  .panel:nth-of-type(6) {
+    display: none;
+  }
+}
